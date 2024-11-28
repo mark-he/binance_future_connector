@@ -8,6 +8,6 @@
 
 具体使用方法可以参考 Examples。
 
-This is a future connector for Binance Exchange. If you have already used the official Spot connector of Binance, then you might also want to use this one for future as well.
+This is a connector for Binance Future. If you have already used the official Spot connector of Binance, then you might also want to use this one for future as well.
 
 It looks similar to the official version of Spot connector of Binance. Besides the interfaces of Binance Future, it provides two connectors for Websocket Stream, carries with the functionalities of AUTO reconnect, RENEW ListenKey.
