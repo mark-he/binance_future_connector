@@ -88,16 +88,19 @@ impl WssListeneKeyKeepalive {
             } else {
                 let conn = self.conn.as_mut().unwrap();
                 let mut renew = Instant::now();
+                let mut trigger_time = self.renew_interval as f64;
                 loop {
                     sleep(Duration::from_millis(10));
                     if let Some(b) = self.renew_block.as_ref() {
-                        if renew.elapsed().as_secs() as f64 >= (self.renew_interval as f64) {
+                        if renew.elapsed().as_secs() as f64 >= (trigger_time * 0.8) {
                             let ret = b(&self.listen_key);
                             if ret.is_ok() {
                                 renew = Instant::now();
+                                trigger_time = self.renew_interval as f64;
                                 println!("Renew >>>> {:?}", self.listen_key);
                                 break;
                             } else {
+                                trigger_time = trigger_time + 1 as f64;
                                 println!("Error >>>> {:?}", ret.unwrap_err());
                             }
                         }
